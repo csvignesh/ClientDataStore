@@ -6,16 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:csvignesh/ClientDataStore.git"
+  },
+  "keywords": [
+    "node",
+    "indexeddb",
+    "heap",
+    "datastore",
+    "client"
+  ],
   "author": "Vignesh CS",
   "license": "ISC",
   "dependencies": {
     "browser-refresh-taglib": "^1",
     "jquery": "^1.8.3",
     "optimizer-plugin-inc": "^0.3",
-    "lasso": "^1",
-    "lasso-less": "^2",
-    "lasso-dust": "^1",
-    "lasso-marko": "^2"
+    "lasso": "^1"
   },
   "devDependencies": {
     "grunt": "^0.4",
