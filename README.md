@@ -11,9 +11,10 @@
 * Promise based implementation. Every interface should return a promise
 
 ##Interfaces
-####init(metas)
+####init(dbName, metas)
 Creates objectStores and indexes.
-
+>dbName - name of the database you want to create.
+>
 >metas - Array that accepts list of ObjectStore(like table) and their indexes.
 >
 >output - promise
@@ -178,5 +179,9 @@ filterData:
     }
    ```
 
-####destory()
+####destory(dbName)
+>
+>dbName - name of the database you want to create.
+>
+
 Clears and cleans up created datastore. 
