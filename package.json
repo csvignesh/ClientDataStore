@@ -1,7 +1,7 @@
 {
   "name": "LocalDataStore",
   "version": "0.0.0",
-  "description": "stores any data. Indexed based querying supported. Can be used both in client/Server side",
+  "description": "Promised based client/server side storage. Stores any data. Indexed based querying supported. Uses IndexedDB/heap based on availability",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,10 +15,24 @@
     "indexeddb",
     "heap",
     "datastore",
-    "client"
+    "client",
+    "browser"
   ],
-  "author": "Vignesh CS",
-  "license": "ISC",
+  "author": "Vignesh CS <vigneshcs.1988@gmail.com>",
+  "contributors": [
+    [
+      {
+        "name": "Vignesh CS",
+        "email": "vigneshcs.1988@gmail.com"
+      }
+    ]
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
   "dependencies": {
     "browser-refresh-taglib": "^1",
     "jquery": "^1.8.3",
