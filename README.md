@@ -1,3 +1,5 @@
+###[Sample App - ClientDataStore-Usage](https://github.com/csvignesh/ClientDataStore-Usage)
+
 ##Datastore implementation
 
 ![arch](./datastore-impl.png)
@@ -10,6 +12,18 @@
 
 * Promise based implementation. Every interface should return a promise
 
+##Assume we need marks of all students in a class
+Each student has
+* roll number (unique index)
+* subject1 mark
+* subject2 mark
+* subject3 mark
+* total
+
+>Create DB and insert student data
+>
+>var dataStore = require('
+
 ##Interfaces
 ####init(dbName, metas)
 Creates objectStores and indexes.
@@ -21,15 +35,11 @@ Creates objectStores and indexes.
 >
 >promise resolution: empty
 
-
    ```json
     {
-        name: "fits",
+        name: "marksheet_jan",
         meta: [
-				{name:'filter1', unique:false},
-				{name:'select_count', unique:false},
-				{name:'grpFil12', unique:false},
-				{name:'grpFil123', unique:true}
+				{name:'roll_numb', unique:true}
 			]
     }
    ```
