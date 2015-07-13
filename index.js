@@ -1,8 +1,8 @@
 'use strict';
 // the sequence in which datastore compatibility will be checked.
 var dsPriority = [
-  require('./indexed-db'),
-  require('./heap')
+  require('./data-store/indexed-db'),
+  require('./data-store/heap')
 ];
 // return supported datastore
 module.exports = (function getSupportedDataStore() {
