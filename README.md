@@ -10,19 +10,70 @@
 
 * Currently we have only indexedDB and heap impl. We can extend it websql or which ever local storage it can use/ a completly service based impl. 
 
-* Promise based implementation. Every interface should return a promise
+* Promise based implementation. Every interface return a promise.
+>
+>       dataStore.init(dbName, metas).then(function(){
+>           //insert data after initialization is done
+>           dataStore.insert(meta, data).then(function(){
+>               //do something after insert
+>           });
+>       }).fail(function(){
+>          //throw a error
+>       });
 
 ##Assume we need marks of all students in a class
 Each student has
+
 * roll number (unique index)
+
 * subject1 mark
+
 * subject2 mark
+
 * subject3 mark
+
 * total
 
->Create DB and insert student data
->
->var dataStore = require('
+###Create DB, Object stores, indexes
+>tableMeta
+```json
+        {
+             name: 'marksheet',
+             indexes: [
+                 {
+                     name: 'rollnumber',
+                     unique: true
+                 }
+             ]
+        }
+```
+####Code Sample
+>       var dataStore = require('localdatastore');
+>       dataStore.init('students', [tableMeta]);
+
+###Insert data
+>studentData
+```json
+[
+    {
+        'rollnumber': 1,
+        'sub1': 90,
+        'sub2': 99,
+        'sub3': 89,
+        'total': 278
+    },
+    {
+        'rollnumber': 2,
+        'sub1': 91,
+        'sub2': 100,
+        'sub3': 89,
+        'total': 280
+    }
+]
+```
+####Code sample
+>       var meta = { name: 'marksheet' }
+>       dataStore.insert(meta, studentData);
 
 ##Interfaces
 ####init(dbName, metas)
@@ -35,13 +86,22 @@ Creates objectStores and indexes.
 >
 >promise resolution: empty
 
+######metas Sample
    ```json
-    {
-        name: "marksheet_jan",
-        meta: [
+    [
+        {
+            name: "marksheet_jan",
+            meta: [
 				{name:'roll_numb', unique:true}
-			]
-    }
+			    ]
+        },
+        {
+            name: "marksheet_feb",
+            meta: [
+                {name:'roll_numb', unique:true}
+                ]
+        }
+    ]
    ```
 
 ####insert(meta, data)
@@ -53,27 +113,27 @@ insert object(s) to the specified ObjectStore.
 >
 >promise resolution: empty
 
-Sample
-
+######Sample
 meta:
 
    ```json
     {
-        name: 'fits'
+        name: 'marksheet_jan'
     }
    ```
 
 data:
 
    ```json
-    [{
-        filter1: 'Jaguar',
-		filter2: 'F-PACE',
-		filter3: '2015',
-		grpFil12: 'Jaguar|F-PACE',
-		grpFil123: 'Jaguar|F-PACE|2015',
-		select_count: 5
-    }]
+    [
+        {
+            'rollnumber': 1,
+            'sub1': 90,
+            'sub2': 99,
+            'sub3': 89,
+            'total': 278
+        }
+    ]
    ```
  
 ####select(meta, [filters])
@@ -87,13 +147,12 @@ Returns object(s) from the specified ObjectStore, based on the filter(s).
 >
 >promise resolution: Array of objects matching the filters
 
-Sample
-
+######Sample
 meta:
 
    ```json
     {
-        name: 'fits', index
+        name: 'marksheet_jan'
     }
    ```
 
@@ -101,12 +160,15 @@ filterData:
 
    ```json
     {
-		index: grpFilter123,
+		index: rollnumber,
         data: [
-				'Jaguar|F-PACE|2015'
+				1,
+				22
 			]
     }
    ```
+
+Returns records having rollnumber 1 or 22.
 
 ####update(meta, filterData, data)
 Updates object(s) in the specified ObjectStore, based on the filter(s) and provided data. If any property is set to undefined, those properties will be dropped when updating.
@@ -122,13 +184,12 @@ Updates object(s) in the specified ObjectStore, based on the filter(s) and provi
 >promise resolution: empty
 
 
-Sample
-
+######Sample
 meta:
 
    ```json
     {
-        name: 'fits', index
+        name: 'marksheet_jan'
     }
    ```
 
@@ -136,9 +197,9 @@ filterData:
 
    ```json
     {
-		index: grpFilter123,
+		index: rollnumber, //search index
         data: [
-				'Jaguar|F-PACE|2015'
+				1
 			]
     }
    ```
@@ -147,15 +208,15 @@ data:
 
    ```json
     {
-        filter1: 'Jaguar',
-		filter2: 'F-PACE',
-		filter3: '2015',
-		grpFil12: 'Jaguar|F-PACE',
-		grpFil123: 'Jaguar|F-PACE|2015',
-		select_count: undefined
+        'rollnumber': 1,
+        'sub1': 100,
+        'sub2': 100,
+        'sub3': 100,
+        'total': 300
     }
    ```
 
+updates record will rollnumber 1 with the provided data.
 
 ####delete(meta, filterData)
 Delete object(s) in the specified ObjectStore, based on the filter(s). Not providing any filter will delete all entries.
@@ -168,13 +229,12 @@ Delete object(s) in the specified ObjectStore, based on the filter(s). Not provi
 >
 >promise resolution: empty
 
-Sample
-
+######Sample
 meta:
 
    ```json
     {
-        name: 'fits', index
+        name: 'marksheet_jan'
     }
    ```
 
@@ -182,16 +242,17 @@ filterData:
 
    ```json
     {
-		index: grpFilter123,
+		index: rollnumber,
         data: [
-				'Jaguar|F-PACE|2015'
+				1
 			]
     }
    ```
+Removes the record with rollnumber 1.
 
 ####destory(dbName)
 >
 >dbName - name of the database you want to create.
 >
 
-Clears and cleans up created datastore. 
+Deletes the provided database.
