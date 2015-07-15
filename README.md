@@ -1,6 +1,6 @@
-###[Sample App - ClientDataStore-Usage](https://github.com/csvignesh/ClientDataStore-Usage)
+### [Sample App - ClientDataStore-Usage](https://github.com/csvignesh/ClientDataStore-Usage)
 
-##Datastore implementation
+## Datastore implementation
 
 ![arch](./datastore-impl.png)
 
@@ -21,7 +21,7 @@
 >          //throw a error
 >       });
 
-##Assume we need marks of all students in a class
+## Assume we need marks of all students in a class
 Each student has
 
 * roll number (unique index)
@@ -34,7 +34,7 @@ Each student has
 
 * total
 
-###Create DB, Object stores, indexes
+### Create DB, Object stores, indexes
 >tableMeta
 ```json
         {
@@ -47,11 +47,11 @@ Each student has
              ]
         }
 ```
-####Code Sample
+#### Code Sample
 >       var dataStore = require('localdatastore');
 >       dataStore.init('students', [tableMeta]);
 
-###Insert data
+### Insert data
 >studentData
 ```json
 [
@@ -71,12 +71,12 @@ Each student has
     }
 ]
 ```
-####Code sample
+#### Code sample
 >       var meta = { name: 'marksheet' }
 >       dataStore.insert(meta, studentData);
 
-##Interfaces
-####init(dbName, metas)
+## Interfaces
+#### init(dbName, metas)
 Creates objectStores and indexes.
 >dbName - name of the database you want to create.
 >
@@ -86,7 +86,7 @@ Creates objectStores and indexes.
 >
 >promise resolution: empty
 
-######metas Sample
+###### metas Sample
    ```json
     [
         {
@@ -104,7 +104,7 @@ Creates objectStores and indexes.
     ]
    ```
 
-####insert(meta, data)
+#### insert(meta, data)
 insert object(s) to the specified ObjectStore.
 
 >meta - Object with ObjectStore name
@@ -113,7 +113,7 @@ insert object(s) to the specified ObjectStore.
 >
 >promise resolution: empty
 
-######Sample
+###### Sample
 meta:
 
    ```json
@@ -136,7 +136,7 @@ data:
     ]
    ```
  
-####select(meta, [filters])
+#### select(meta, [filters])
 Returns object(s) from the specified ObjectStore, based on the filter(s).
 
 >meta - Object with ObjectStore name and index name which will be used if its a non filter selectAll case
@@ -147,7 +147,7 @@ Returns object(s) from the specified ObjectStore, based on the filter(s).
 >
 >promise resolution: Array of objects matching the filters
 
-######Sample
+###### Sample
 meta:
 
    ```json
@@ -170,7 +170,7 @@ filterData:
 
 Returns records having rollnumber 1 or 22.
 
-####update(meta, filterData, data)
+#### update(meta, filterData, data)
 Updates object(s) in the specified ObjectStore, based on the filter(s) and provided data. If any property is set to undefined, those properties will be dropped when updating.
 
 >meta - Object with ObjectStore name
@@ -184,7 +184,7 @@ Updates object(s) in the specified ObjectStore, based on the filter(s) and provi
 >promise resolution: empty
 
 
-######Sample
+###### Sample
 meta:
 
    ```json
@@ -218,7 +218,7 @@ data:
 
 updates record will rollnumber 1 with the provided data.
 
-####delete(meta, filterData)
+#### delete(meta, filterData)
 Delete object(s) in the specified ObjectStore, based on the filter(s). Not providing any filter will delete all entries.
 
 >meta - Object with ObjectStore name
@@ -229,7 +229,7 @@ Delete object(s) in the specified ObjectStore, based on the filter(s). Not provi
 >
 >promise resolution: empty
 
-######Sample
+###### Sample
 meta:
 
    ```json
@@ -250,7 +250,7 @@ filterData:
    ```
 Removes the record with rollnumber 1.
 
-####destory(dbName)
+#### destory(dbName)
 >
 >dbName - name of the database you want to create.
 >
