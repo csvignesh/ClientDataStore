@@ -218,7 +218,7 @@ data:
 
 updates record will rollnumber 1 with the provided data.
 
-#### delete(meta, filterData)
+#### remove(meta, filterData)
 Delete object(s) in the specified ObjectStore, based on the filter(s). Not providing any filter will delete all entries.
 
 >meta - Object with ObjectStore name
