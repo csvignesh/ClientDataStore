@@ -1,7 +1,7 @@
 {
   "name": "localdatastore",
   "version": "0.1.0",
-  "description": "Promised based client/server side storage. Stores any data. Indexed based querying supported. Uses IndexedDB/heap based on availability",
+  "description": "Promise based client/server side storage. Stores any data. Index based querying supported. Uses IndexedDB/heap based on availability",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
