@@ -1,6 +1,6 @@
 {
   "name": "localdatastore",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Promise based client/server side storage. Stores any data. Index based querying supported. Uses IndexedDB/heap based on availability",
   "main": "index.js",
   "scripts": {
