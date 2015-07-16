@@ -9,6 +9,15 @@ var cursorReader = function cursorReader(result) {
     var cursor = result.target.result;
     var _this = this;
     if (cursor) {
+        /*
+        removing autoGenID from response objects - so that update key doesnt conflict if it has a autogen ID
+        And we remove the autoGenID only when there is another user specified index
+         */
+        var srcElem = result.srcElement.source;
+        if ((srcElem.indexNames && srcElem.indexNames.length > 0) ||
+            (srcElem.objectStore.indexNames && srcElem.objectStore.indexNames.length > 0)) {
+            delete cursor.value[CONSTANTS.AUTO_INCREMENT.keyPath];
+        }
         _this.data.push(cursor.value);
         cursor.continue();
     } else {

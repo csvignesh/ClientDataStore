@@ -1,6 +1,6 @@
 var CONSTANTS = {
     AUTO_INCREMENT: {
-        keyPath: 'id',
+        keyPath: 'autoGenID',
         autoIncrement: true
     }
 };
