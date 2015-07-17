@@ -13,7 +13,7 @@ var cursorReader = function cursorReader(result) {
         removing autoGenID from response objects - so that update key doesnt conflict if it has a autogen ID
         And we remove the autoGenID only when there is another user specified index
          */
-        var srcElem = result.srcElement.source;
+        var srcElem = result.target.source;
         if ((srcElem.indexNames && srcElem.indexNames.length > 0) ||
             (srcElem.objectStore.indexNames && srcElem.objectStore.indexNames.length > 0)) {
             delete cursor.value[CONSTANTS.AUTO_INCREMENT.keyPath];

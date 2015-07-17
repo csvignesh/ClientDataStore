@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             browserNoActivityTimeout: 20000,
             captureTimeout: 120000,
             hostname: 'localhost',
-            browsers: ['Chrome', 'PhantomJS'],
+            browsers: ['Chrome', 'PhantomJS', 'Firefox'],
             frameworks: [
                 'lasso',
                 'mocha',
