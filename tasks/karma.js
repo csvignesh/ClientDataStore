@@ -17,10 +17,6 @@ module.exports = function(grunt) {
                 'mocha'
             ],
             lasso: {
-                plugins: [
-                    'lasso-less',
-                    'lasso-dust'
-                ],
                 minify: false,
                 bundlingEnabled: false,
                 resolveCssUrls: true,
@@ -32,7 +28,11 @@ module.exports = function(grunt) {
             browserNoActivityTimeout: 20000,
             captureTimeout: 120000,
             hostname: 'localhost',
-            browsers: ['Chrome', 'PhantomJS', 'Firefox'],
+            browsers: [
+                'Chrome',
+                'PhantomJS',
+                'Firefox'
+            ],
             frameworks: [
                 'lasso',
                 'mocha',

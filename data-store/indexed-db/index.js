@@ -10,8 +10,8 @@ var cursorReader = function cursorReader(result) {
     var _this = this;
     if (cursor) {
         /*
-        removing autoGenID from response objects - so that update key doesnt conflict if it has a autogen ID
-        And we remove the autoGenID only when there is another user specified index
+         removing autoGenID from response objects - so that update key doesnt conflict if it has a autogen ID
+         And we remove the autoGenID only when there is another user specified index
          */
         var srcElem = result.target.source;
         if ((srcElem.indexNames && srcElem.indexNames.length > 0) ||

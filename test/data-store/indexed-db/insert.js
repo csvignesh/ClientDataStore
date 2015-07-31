@@ -53,7 +53,7 @@ describe('data-store/indexed-db/insert', function() {
                     attr2: 'B'
                 }
             ]).fail(function() {
-                return idb.destroy('db2-insert').then(function(){
+                return idb.destroy('db2-insert').then(function() {
                     done();
                 });
             });

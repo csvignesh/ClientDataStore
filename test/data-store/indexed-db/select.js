@@ -169,7 +169,7 @@ describe('data-store/indexed-db/select', function() {
                     index: 'attr1',
                     name: 'invalidtable'
                 }, {}).fail(function() {
-                    return idb.destroy('db5-select').then(function(){
+                    return idb.destroy('db5-select').then(function() {
                         done();
                     });
                 });

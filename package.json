@@ -1,72 +1,71 @@
 {
-  "name": "localdatastore",
-  "version": "0.1.7",
-  "description": "Promise based client/server side storage. Stores any data. Index based querying supported. Uses IndexedDB/heap based on availability",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:csvignesh/ClientDataStore.git"
-  },
-  "keywords": [
-    "node",
-    "indexeddb",
-    "heap",
-    "datastore",
-    "client",
-    "browser"
-  ],
-  "author": "Vignesh CS <vigneshcs.1988@gmail.com>",
-  "contributors": [
-    [
-      {
-        "name": "Vignesh CS",
-        "email": "vigneshcs.1988@gmail.com"
-      }
-    ]
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/mit-license.php"
+    "name": "localdatastore",
+    "version": "0.1.7",
+    "description": "Promise based client/server side storage. Stores any data. Index based querying supported. Uses IndexedDB/heap based on availability",
+    "main": "index.js",
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:csvignesh/ClientDataStore.git"
+    },
+    "keywords": [
+        "node",
+        "indexeddb",
+        "heap",
+        "datastore",
+        "client",
+        "browser"
+    ],
+    "author": "Vignesh CS <vigneshcs.1988@gmail.com>",
+    "contributors": [
+        [
+            {
+                "name": "Vignesh CS",
+                "email": "vigneshcs.1988@gmail.com"
+            }
+        ]
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "dependencies": {
+        "jquery": "^1.8.3"
+    },
+    "peerDependencies": {
+        "lasso": "^1"
+    },
+    "devDependencies": {
+        "grunt": "^0.4",
+        "grunt-config-dir": "^0",
+        "grunt-karma": "^0.10.1",
+        "karma-chai": "^0.1.0",
+        "karma-mocha": "^0.1.10",
+        "karma-lasso": "^1",
+        "lasso-require": "^1",
+        "lasso-less": "^2",
+        "lasso-dust": "^1",
+        "karma-phantomjs-launcher": "^0.1.4",
+        "karma-mocha-reporter": "^0.3.1",
+        "karma-chrome-launcher": "^0.1.7",
+        "karma-firefox-launcher": "^0.1.4",
+        "karma-safari-launcher": "^0.1.1",
+        "karma-opera-launcher": "^0.1.0",
+        "karma-ie-launcher": "^0.1.5",
+        "karma-webdriver-launcher": "^1.0",
+        "glob": "^4.3.5",
+        "chai": "^1",
+        "chai-a11y": "^0",
+        "mocha": "^1",
+        "supertest": "^0",
+        "sinon": "1.14.1",
+        "sinon-chai": "^2.7.0",
+        "karma-sinon": "^1.0.4",
+        "karma-sinon-expect": "^0.1.4",
+        "karma-coverage": "^0.2"
     }
-  ],
-  "dependencies": {
-    "jquery": "^1.8.3",
-    "lasso": "^1",
-    "lasso-less": "^2",
-    "lasso-dust": "^1"
-  },
-  "peerDependencies": {
-    "karma": "~0.12.0",
-    "lasso-require": "^1"
-  },
-  "devDependencies": {
-    "grunt": "^0.4",
-    "grunt-config-dir": "^0",
-    "grunt-karma": "^0.10.1",
-    "karma-chai": "^0.1.0",
-    "karma-mocha": "^0.1.10",
-    "karma-lasso": "^1",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-mocha-reporter": "^0.3.1",
-    "karma-chrome-launcher": "^0.1.7",
-    "karma-firefox-launcher": "^0.1.4",
-    "karma-safari-launcher": "^0.1.1",
-    "karma-opera-launcher": "^0.1.0",
-    "karma-ie-launcher": "^0.1.5",
-    "karma-webdriver-launcher": "^1.0",
-    "glob": "^4.3.5",
-    "chai": "^1",
-    "chai-a11y": "^0",
-    "mocha": "^1",
-    "supertest": "^0",
-    "sinon": "1.14.1",
-    "sinon-chai": "^2.7.0",
-    "karma-sinon": "^1.0.4",
-    "karma-sinon-expect": "^0.1.4",
-    "karma-coverage": "^0.2"
-  }
 }

@@ -147,7 +147,7 @@ describe('data-store/indexed-db/update', function() {
                             data: ['Anew']
                         }).then(function(data) {
                             expect(data.length).to.eql(0);
-                            return idb.destroy('db3-update').then(function(){
+                            return idb.destroy('db3-update').then(function() {
                                 done();
                             });
                         });
@@ -186,7 +186,7 @@ describe('data-store/indexed-db/update', function() {
                     attr1: 'Anew',
                     attr2: 'Bnew'
                 }).fail(function() {
-                    return idb.destroy('db4-update').then(function(){
+                    return idb.destroy('db4-update').then(function() {
                         done();
                     });
                 });

@@ -143,7 +143,7 @@ describe('data-store/indexed-db/remove', function() {
                 }
             ]).then(function() {
                 return idb.remove({name: 'invalidtable'}, {}).fail(function() {
-                    return idb.destroy('db1-remove').then(function(){
+                    return idb.destroy('db1-remove').then(function() {
                         done();
                     });
                 });

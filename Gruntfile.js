@@ -7,7 +7,6 @@ module.exports = function(grunt) {
         configDir: require('path').join(__dirname, 'tasks')
     });
 
-
     // ### test task
     grunt.registerTask('test', [
         'karma:test'
