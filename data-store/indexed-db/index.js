@@ -228,22 +228,22 @@ module.exports = {
     },
 
     //delete the created db
-    destroy: function() {
-        var dbs = Array.prototype.slice.call(arguments);
-        if (!dbs.length) {
-            var d = $.Deferred();
-            var deleteRequest = indexedDB.deleteDatabase(this.id);
-            deleteRequest.onerror = d.reject;
-            deleteRequest.onsuccess = d.resolve;
-            return d.promise();
+    destroy: function(id) {
+        var deferred = new $.Deferred();
+        if (!this.id) {
+            var deleteRequest = indexedDB.deleteDatabase(id);
+            deleteRequest.onerror = deferred.reject;
+            deleteRequest.onsuccess = deferred.resolve;
+            return deferred.promise();
         }
-        return $.when.apply($, dbs.map(function(db) {
-            var d = $.Deferred();
-            var deleteRequest = indexedDB.deleteDatabase(db);
-            deleteRequest.onerror = d.reject;
-            deleteRequest.onsuccess = d.resolve;
-            return d.promise();
-        }));
+
+        this.db.close();
+        this.db = null;
+        var deleteRequest = indexedDB.deleteDatabase(this.id);
+        this.id = null;
+        deleteRequest.onerror = deferred.reject;
+        deleteRequest.onsuccess = deferred.resolve;
+        return deferred.promise();
     }
 
 };
