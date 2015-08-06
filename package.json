@@ -36,10 +36,8 @@
     "dependencies": {
         "jquery": "^1.8.3"
     },
-    "peerDependencies": {
-        "lasso": "^1"
-    },
     "devDependencies": {
+        "lasso": "^1",
         "grunt": "^0.4",
         "grunt-config-dir": "^0",
         "grunt-karma": "^0.10.1",
