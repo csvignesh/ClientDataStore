@@ -1,7 +1,6 @@
 'use strict';
-require('../../../data-store/shims');
-var heap = require('../../../data-store/heap');
-var helper = require('../../../data-store/heap/helper');
+var heap = require('../../lib/heap');
+var helper = require('../../lib/heap/helper');
 var expect = require('chai').expect;
 describe('data-store/heap/insert', function() {
     it('lets you insert valid values in the database', function() {

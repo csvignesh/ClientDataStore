@@ -1,6 +1,5 @@
 'use strict';
-require('../../../data-store/shims');
-var heap = require('../../../data-store/heap');
+var heap = require('../../lib/heap');
 var expect = require('chai').expect;
 describe('data-store/heap/select', function() {
     it('lets you select all values based on an index', function() {

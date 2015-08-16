@@ -8,7 +8,7 @@
 
 * Every datastore instance will implement all the interface that the data-store exposes
 
-* Currently we have only indexedDB and heap impl. We can extend it websql or which ever local storage it can use/ a completly service based impl. 
+* Currently we have only indexedDB and heap impl. We can extend it websql or which ever local storage it can use / a completely service based impl.
 
 * Promise based implementation. Every interface return a promise.
 >
@@ -22,6 +22,7 @@
 >       });
 
 ## Assume we need marks of all students in a class
+
 Each student has
 
 * roll number (unique index)
@@ -35,6 +36,7 @@ Each student has
 * total
 
 ### Create DB, Object stores, indexes
+
 >tableMeta
 ```json
         {
@@ -47,12 +49,18 @@ Each student has
              ]
         }
 ```
+
+
 #### Code Sample
+
 >       var dataStore = require('localdatastore');
 >       dataStore.init('students', [tableMeta]);
 
+
 ### Insert data
+
 >studentData
+
 ```json
 [
     {
@@ -71,13 +79,21 @@ Each student has
     }
 ]
 ```
+
+
 #### Code sample
+
 >       var meta = { name: 'marksheet' }
 >       dataStore.insert(meta, studentData);
 
+
+
 ## Interfaces
+
 #### init(dbName, metas)
+
 Creates objectStores and indexes.
+
 >dbName - name of the database you want to create.
 >
 >metas - Array that accepts list of ObjectStore(like table) and their indexes.
@@ -86,7 +102,9 @@ Creates objectStores and indexes.
 >
 >promise resolution: empty
 
+
 ###### metas Sample
+
    ```json
     [
         {
@@ -104,7 +122,9 @@ Creates objectStores and indexes.
     ]
    ```
 
+
 #### insert(meta, data)
+
 insert object(s) to the specified ObjectStore.
 
 >meta - Object with ObjectStore name
@@ -113,7 +133,9 @@ insert object(s) to the specified ObjectStore.
 >
 >promise resolution: empty
 
+
 ###### Sample
+
 meta:
 
    ```json
@@ -137,6 +159,7 @@ data:
    ```
  
 #### select(meta, [filters])
+
 Returns object(s) from the specified ObjectStore, based on the filter(s).
 
 >meta - Object with ObjectStore name and index name which will be used if its a non filter selectAll case
@@ -147,7 +170,9 @@ Returns object(s) from the specified ObjectStore, based on the filter(s).
 >
 >promise resolution: Array of objects matching the filters
 
+
 ###### Sample
+
 meta:
 
    ```json
@@ -170,7 +195,9 @@ filterData:
 
 Returns records having rollnumber 1 or 22.
 
+
 #### update(meta, filterData, data)
+
 Updates object(s) in the specified ObjectStore, based on the filter(s) and provided data. If any property is set to undefined, those properties will be dropped when updating.
 
 >meta - Object with ObjectStore name
@@ -185,6 +212,7 @@ Updates object(s) in the specified ObjectStore, based on the filter(s) and provi
 
 
 ###### Sample
+
 meta:
 
    ```json
@@ -218,7 +246,9 @@ data:
 
 updates record will rollnumber 1 with the provided data.
 
+
 #### remove(meta, filterData)
+
 Delete object(s) in the specified ObjectStore, based on the filter(s). Not providing any filter will delete all entries.
 
 >meta - Object with ObjectStore name
@@ -229,7 +259,9 @@ Delete object(s) in the specified ObjectStore, based on the filter(s). Not provi
 >
 >promise resolution: empty
 
+
 ###### Sample
+
 meta:
 
    ```json
@@ -250,7 +282,9 @@ filterData:
    ```
 Removes the record with rollnumber 1.
 
+
 #### destory(dbName)
+
 >
 >dbName - name of the database you want to create.
 >

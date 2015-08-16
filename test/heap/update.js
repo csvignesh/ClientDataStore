@@ -1,6 +1,5 @@
 'use strict';
-require('../../../data-store/shims');
-var heap = require('../../../data-store/heap');
+var heap = require('../../lib/heap');
 var expect = require('chai').expect;
 describe('data-store/heap/update', function() {
     it('updates the value based on one key in an index', function() {

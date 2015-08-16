@@ -1,19 +1,12 @@
 'use strict';
-require('../../../data-store/shims')
-var idb = require('../../../data-store/indexed-db');
+var idb = require('../../lib/indexed-db');
 var expect = require('chai').expect;
-var isSupported = false;
 describe('data-store/indexed-db/init', function() {
-    before(function(done) {
-        return idb.isSupported().then(function(supported) {
-            isSupported = supported;
-            done();
-        });
-    });
+    if (!idb.isSupported()) {
+        return;
+    }
+
     it('creates a database without errors', function() {
-        if (!isSupported) {
-            return;
-        }
         return idb.init('db-init-1', [
             {
                 indexes: [{name: 'attr1'}],
