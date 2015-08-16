@@ -1,64 +1,84 @@
 'use strict';
 var heap = require('../../lib/heap');
-var helper = require('../../lib/heap/helper');
 var expect = require('chai').expect;
 describe('data-store/heap/insert', function() {
+    if (!heap.isSupported()) {
+        return;
+    }
+
     it('lets you insert valid values in the database', function() {
-        return heap.init([
+        var datastore = null;
+        return heap.init('db1-insert', [
             {
-                indexes: [
-                    {
-                        name: 'attr1',
-                        unique: true
-                    }
-                ],
+                indexes: [{name: 'attr1'}],
                 name: 'table1'
             }
-        ]).then(function() {
-            return heap.insert({name: 'table1'}, [
+        ]).then(function(db) {
+            datastore = db;
+        }).then(function() {
+            return datastore.insert({name: 'table1'}, [
                 {
                     attr1: 'A',
                     attr2: 'B'
                 }
-            ]).then(function() {
-                var data = helper.getAllData.call(heap, {
-                    index: 'attr1',
-                    name: 'table1'
-                });
-                expect(data.length).to.eql(1);
-                expect(data[0].attr1).to.eql('A');
-                expect(data[0].attr2).to.eql('B');
-            });
+            ]);
+        }).then(function() {
+            return datastore.select({
+                index: 'attr1',
+                name: 'table1'
+            }, {});
+        }).then(function(data) {
+            expect(data[0].attr1).to.eql('A');
+            expect(data[0].attr2).to.eql('B');
+            return heap.destroy('db1-insert');
         });
     });
     it('doesn\'t allow inserting in a non-existing table', function(done) {
-        //to be fixed
-
-        return heap.init([
+        var datastore = null;
+        return heap.init('db2-insert', [
             {
-                indexes: [
-                    {
-                        name: 'attr1',
-                        unique: true
-                    }
-                ],
+                indexes: [{name: 'attr1'}],
                 name: 'table1'
             }
-        ]).then(function() {
-            return heap.insert({name: 'table_doesnt_exist'}, [
+        ]).then(function(db) {
+            datastore = db;
+        }).then(function() {
+            return datastore.insert({name: 'table_doesnt_exist'}, [
                 {
                     attr1: 'A',
                     attr2: 'B'
                 }
-            ]).fail(function(resp) {
-                expect(resp).to.eql('Meta not found');
-                var data = helper.getAllData.call(heap, {
-                    index: 'attr1',
-                    name: 'table1'
-                });
-                expect(data.length).to.eql(0);
+            ]);
+        }).fail(function() {
+            return heap.destroy('db2-insert').then(function() {
                 done();
             });
+        });
+    });
+
+    it('doesn\'t let you insert values with missing values for indexes', function() {
+        var datastore = null;
+        return heap.init('db3-insert', [
+            {
+                indexes: [
+                    {
+                        name: 'attr1'
+                    }
+                ],
+                name: 'table1'
+            }
+        ]).then(function(db) {
+            datastore = db;
+        }).then(function() {
+            return datastore.insert({name: 'table1'}, [{attr1: null}]);
+        }).then(function() {
+            return datastore.select({
+                index: 'attr1',
+                name: 'table1'
+            }, {});
+        }).then(function(data) {
+            expect(data.length).to.eql(0);
+            return heap.destroy('db3-insert')
         });
     });
 });

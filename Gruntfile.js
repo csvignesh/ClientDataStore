@@ -24,7 +24,7 @@ var jshintOptions = {
     newcap: true,
     immed: true,
     camelcase: true,
-    maxcomplexity: 8,
+    maxcomplexity: 9,
     maxlen: 120,
     nonbsp: true,
     freeze: true

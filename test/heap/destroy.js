@@ -1,16 +1,31 @@
 'use strict';
 var heap = require('../../lib/heap');
 var expect = require('chai').expect;
+
 describe('data-store/heap/destroy', function() {
-    it('deletes an existing object stores from heap', function() {
-        return heap.init([
+    if (!heap.isSupported()) {
+        return;
+    }
+    it('deletes an existing datastore', function() {
+        return heap.init('db1', [
             {
-                indexes: [{name: 'attr1'}],
+                indexes: [
+                    {
+                        name: 'attr1'
+                    }
+                ],
                 name: 'table1'
             }
         ]).then(function() {
-            return heap.destroy().then(function(resp) {
-                expect(resp).to.eql('success');
+            return heap.destroy('db1').then(function(data) {
+                expect(data.type).to.eql('success');
+            });
+        });
+    });
+    it('silently fails if the datastore to delete doesn\'t exist', function() {
+        return heap.init('db1', []).then(function() {
+            return heap.destroy('db1').then(function() {
+                return heap.destroy('db1');
             });
         });
     });

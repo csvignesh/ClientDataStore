@@ -2,7 +2,7 @@
 
 ## Datastore implementation
 
-![arch](./datastore-impl.png)
+![Architecture](./datastore-impl.png)
 
 * DataStore is no sql with indexes. The implementation depends on the browser capability. If there is indexedDB support, it uses idb. Else it falls back to heap.
 
@@ -11,15 +11,18 @@
 * Currently we have only indexedDB and heap impl. We can extend it websql or which ever local storage it can use / a completely service based impl.
 
 * Promise based implementation. Every interface return a promise.
->
->       dataStore.init(dbName, metas).then(function(){
->           //insert data after initialization is done
->           dataStore.insert(meta, data).then(function(){
->               //do something after insert
->           });
->       }).fail(function(){
->          //throw a error
->       });
+
+``` javascript
+var ds = dataStore.get();
+ds.init(dbName, metas).then(function(){
+    //insert data after initialization is done
+    dataStore.insert(meta, data).then(function(){
+        //do something after insert
+    });
+}).fail(function(){
+    //throw a error
+});
+```
 
 ## Assume we need marks of all students in a class
 
@@ -37,29 +40,30 @@ Each student has
 
 ### Create DB, Object stores, indexes
 
->tableMeta
-```json
-        {
-             name: 'marksheet',
-             indexes: [
-                 {
-                     name: 'rollnumber',
-                     unique: true
-                 }
-             ]
-        }
-```
+> tableMeta
 
+```json
+{
+     name: 'marksheet',
+     indexes: [
+         {
+             name: 'rollnumber',
+             unique: true
+         }
+     ]
+}
+```
 
 #### Code Sample
 
->       var dataStore = require('localdatastore');
->       dataStore.init('students', [tableMeta]);
-
+``` javascript
+var dataStore = require('localdatastore');
+dataStore.init('students', [tableMeta]);
+```
 
 ### Insert data
 
->studentData
+> studentData
 
 ```json
 [
@@ -83,9 +87,10 @@ Each student has
 
 #### Code sample
 
->       var meta = { name: 'marksheet' }
->       dataStore.insert(meta, studentData);
-
+``` javascript
+var meta = { name: 'marksheet' }
+dataStore.insert(meta, studentData);
+```
 
 
 ## Interfaces
@@ -94,104 +99,116 @@ Each student has
 
 Creates objectStores and indexes.
 
->dbName - name of the database you want to create.
+> dbName - name of the database you want to create.
 >
->metas - Array that accepts list of ObjectStore(like table) and their indexes.
+> metas - Array that accepts list of ObjectStore(like table) and their indexes.
 >
->output - promise
+> output - promise
 >
->promise resolution: empty
+> promise resolution: empty
+
+
+#### destory(dbName)
+
+>
+> dbName - name of the database you want to create.
+>
+
+Deletes the provided database.
+
+#### getStore(dbName)
+
 
 
 ###### metas Sample
 
-   ```json
-    [
-        {
-            name: "marksheet_jan",
-            meta: [
-				{name:'roll_numb', unique:true}
-			    ]
-        },
-        {
-            name: "marksheet_feb",
-            meta: [
-                {name:'roll_numb', unique:true}
-                ]
-        }
-    ]
-   ```
+```json
+[
+    {
+        name: "marksheet_jan",
+        meta: [
+    {name:'roll_numb', unique:true}
+      ]
+    },
+    {
+        name: "marksheet_feb",
+        meta: [
+            {name:'roll_numb', unique:true}
+            ]
+    }
+]
+```
 
 
 #### insert(meta, data)
 
 insert object(s) to the specified ObjectStore.
 
->meta - Object with ObjectStore name
+> meta - Object with ObjectStore name
 >
->output - promise
+> output - promise
 >
->promise resolution: empty
+> promise resolution: empty
 
 
 ###### Sample
 
 meta:
 
-   ```json
-    {
-        name: 'marksheet_jan'
-    }
-   ```
+```json
+{
+    name: 'marksheet_jan'
+}
+```
 
 data:
 
-   ```json
-    [
-        {
-            'rollnumber': 1,
-            'sub1': 90,
-            'sub2': 99,
-            'sub3': 89,
-            'total': 278
-        }
-    ]
-   ```
+```json
+[
+    {
+        'rollnumber': 1,
+        'sub1': 90,
+        'sub2': 99,
+        'sub3': 89,
+        'total': 278
+    }
+]
+```
  
 #### select(meta, [filters])
 
 Returns object(s) from the specified ObjectStore, based on the filter(s).
 
->meta - Object with ObjectStore name and index name which will be used if its a non filter selectAll case
+> meta - Object with ObjectStore name and index name which will be used if its a non filter selectAll case
 >
->filters - {index, [filterData]}
+> filters - {index, [filterData]}
 > 
->output - promise
+> output - promise
 >
->promise resolution: Array of objects matching the filters
+> promise resolution: Array of objects matching the filters
 
 
 ###### Sample
 
 meta:
 
-   ```json
-    {
-        name: 'marksheet_jan'
-    }
-   ```
+```json
+{
+    name: 'marksheet_jan'
+}
+```
 
 filterData:
 
-   ```json
-    {
-		index: rollnumber,
-        data: [
-				1,
-				22
-			]
-    }
-   ```
+```json
+{
+    index: rollnumber,
+    data: [
+        1,
+        22
+    ]
+}
+```
 
 Returns records having rollnumber 1 or 22.
 
@@ -200,49 +217,49 @@ Returns records having rollnumber 1 or 22.
 
 Updates object(s) in the specified ObjectStore, based on the filter(s) and provided data. If any property is set to undefined, those properties will be dropped when updating.
 
->meta - Object with ObjectStore name
+> meta - Object with ObjectStore name
 >
->filter - {index, [filterData]}
+> filter - {index, [filterData]}
 >
->data - {}
+> data - {}
 > 
->output - promise
+> output - promise
 >
->promise resolution: empty
+> promise resolution: empty
 
 
 ###### Sample
 
 meta:
 
-   ```json
-    {
-        name: 'marksheet_jan'
-    }
-   ```
+```json
+{
+    name: 'marksheet_jan'
+}
+```
 
 filterData:
 
-   ```json
-    {
-		index: rollnumber, //search index
-        data: [
-				1
-			]
-    }
-   ```
+```json
+{
+    index: "rollnumber",
+    data: [
+        1
+    ]
+}
+```
 
 data:
 
-   ```json
-    {
-        'rollnumber': 1,
-        'sub1': 100,
-        'sub2': 100,
-        'sub3': 100,
-        'total': 300
-    }
-   ```
+```json
+{
+    'rollnumber': 1,
+    'sub1': 100,
+    'sub2': 100,
+    'sub3': 100,
+    'total': 300
+}
+```
 
 updates record will rollnumber 1 with the provided data.
 
@@ -251,42 +268,35 @@ updates record will rollnumber 1 with the provided data.
 
 Delete object(s) in the specified ObjectStore, based on the filter(s). Not providing any filter will delete all entries.
 
->meta - Object with ObjectStore name
+> meta - Object with ObjectStore name
 >
->filter - {index, [filterData]}
+> filter - {index, [filterData]}
 > 
->output - promise
+> output - promise
 >
->promise resolution: empty
+> promise resolution: empty
 
 
 ###### Sample
 
 meta:
 
-   ```json
-    {
-        name: 'marksheet_jan'
-    }
-   ```
+```json
+{
+    name: 'marksheet_jan'
+}
+```
 
 filterData:
 
-   ```json
-    {
-		index: rollnumber,
-        data: [
-				1
-			]
-    }
-   ```
+```json
+{
+    index: rollnumber,
+    data: [
+        1
+    ]
+}
+```
+
 Removes the record with rollnumber 1.
 
-
-#### destory(dbName)
-
->
->dbName - name of the database you want to create.
->
-
-Deletes the provided database.
