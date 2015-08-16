@@ -14,9 +14,9 @@
 
 ``` javascript
 var ds = dataStore.get();
-ds.init(dbName, metas).then(function(){
+ds.init(dbName, metas).then(function(database){
     //insert data after initialization is done
-    dataStore.insert(meta, data).then(function(){
+    database.insert(meta, data).then(function(){
         //do something after insert
     });
 }).fail(function(){
