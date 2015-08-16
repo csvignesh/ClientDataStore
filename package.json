@@ -34,30 +34,30 @@
         }
     ],
     "dependencies": {
-        "jquery": "latest"
+        "jquery": "^2"
     },
     "devDependencies": {
-        "lasso": "latest",
-        "grunt": "latest",
-        "grunt-karma": "latest",
-        "karma-chai": "latest",
-        "karma-mocha": "latest",
-        "karma-lasso": "latest",
-        "lasso-require": "latest",
-        "karma-phantomjs-launcher": "latest",
-        "karma-mocha-reporter": "latest",
-        "karma-chrome-launcher": "latest",
-        "karma-firefox-launcher": "latest",
-        "karma-safari-launcher": "latest",
-        "karma-opera-launcher": "latest",
-        "karma-ie-launcher": "latest",
-        "karma-webdriver-launcher": "latest",
-        "grunt-contrib-jshint": "latest",
-        "grunt-contrib-clean": "latest",
-        "glob": "latest",
-        "chai": "latest",
-        "mocha": "latest",
-        "sinon": "latest",
-        "sinon-chai": "latest"
+        "lasso": "^1",
+        "grunt": "^0",
+        "grunt-karma": "^0",
+        "grunt-contrib-jshint": "^0",
+        "grunt-contrib-clean": "^0",
+        "karma-chai": "^0",
+        "karma-mocha": "^0",
+        "karma-lasso": "^1",
+        "lasso-require": "^1",
+        "karma-phantomjs-launcher": "^0",
+        "karma-mocha-reporter": "^1",
+        "karma-chrome-launcher": "^0",
+        "karma-firefox-launcher": "^0",
+        "karma-safari-launcher": "^0",
+        "karma-opera-launcher": "^0",
+        "karma-ie-launcher": "^0",
+        "karma-webdriver-launcher": "^1",
+        "glob": "^5",
+        "chai": "^3",
+        "mocha": "^2",
+        "sinon": "^1",
+        "sinon-chai": "^2"
     }
 }
