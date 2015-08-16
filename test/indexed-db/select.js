@@ -1,19 +1,12 @@
 'use strict';
-require('../../../data-store/shims')
-var idb = require('../../../data-store/indexed-db');
+var idb = require('../../lib/indexed-db');
 var expect = require('chai').expect;
-var isSupported = false;
 describe('data-store/indexed-db/select', function() {
-    before(function(done) {
-        return idb.isSupported().then(function(supported) {
-            isSupported = supported;
-            done();
-        });
-    });
+    if (!idb.isSupported()) {
+        return;
+    }
+
     it('lets you select all values based on an index', function() {
-        if (!isSupported) {
-            return;
-        }
         return idb.init('db1-select', [
             {
                 indexes: [{name: 'attr1'}],
@@ -39,9 +32,6 @@ describe('data-store/indexed-db/select', function() {
     });
 
     it('lets you select values based on one key in an index', function() {
-        if (!isSupported) {
-            return;
-        }
         return idb.init('db2-select', [
             {
                 indexes: [{name: 'attr1'}],
@@ -74,9 +64,6 @@ describe('data-store/indexed-db/select', function() {
     });
 
     it('lets you select values based on an array of keys in an index', function() {
-        if (!isSupported) {
-            return;
-        }
         return idb.init('db3-select', [
             {
                 indexes: [{name: 'attr1'}],
@@ -113,9 +100,6 @@ describe('data-store/indexed-db/select', function() {
         });
     });
     it('returns you an empty dataset if there is nothing to select', function() {
-        if (!isSupported) {
-            return;
-        }
         return idb.init('db4-select', [
             {
                 indexes: [{name: 'attr1'}],
@@ -146,9 +130,6 @@ describe('data-store/indexed-db/select', function() {
         });
     });
     it('throws an error if the table name is invalid', function(done) {
-        if (!isSupported) {
-            done();
-        }
         return idb.init('db5-select', [
             {
                 indexes: [{name: 'attr1'}],

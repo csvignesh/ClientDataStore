@@ -1,8 +1,8 @@
 'use strict';
-require('../../../data-store/shims');
-var heap = require('../../../data-store/heap');
-var helper = require('../../../data-store/heap/helper');
+var heap = require('../../lib/heap');
+var helper = require('../../lib/heap/helper');
 var expect = require('chai').expect;
+
 describe('data-store/heap/helper', function() {
     it('fetches all data from data store', function() {
         return heap.init([
