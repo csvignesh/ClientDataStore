@@ -33,9 +33,28 @@ This module is compatible with browserify and lasso.
 
 ``` javascript
 var ds = require('localdatastore');
+
+
 var selectedDataStore = ds.get();
+
+
+var resolvedDataStore = ds.get(function() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf('msie') > -1) {
+        return 'heap';
+    } else if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
+        return 'heap';
+    }
+    return 'idb';
+});
+
+
+var resolvedDataStore = ds.get('heap');
+
+
 var database1 = selectedDataStore.init('DB_NAME_1', meta);
 database1.insert();
+
 var database2 = selectedDataStore.init('DB_NAME_2', meta);
 database2.insert();
 
