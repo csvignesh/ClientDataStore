@@ -57,7 +57,7 @@ Each student has
 #### Code Sample
 
 ``` javascript
-var dataStore = require('localdatastore');
+var dataStore = require('clientdatastore');
 dataStore.init('students', [tableMeta]);
 ```
 
