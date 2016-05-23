@@ -4,11 +4,11 @@
 
 ![Architecture](./datastore-impl.png)
 
-* DataStore is no sql with indexes. The implementation depends on the browser capability. If there is indexedDB support, it uses idb. Else it falls back to heap.
+* DataStore is no sql with indexes. The implementation depends on the browser capability. If there is indexedDB support, it uses idb. Else it falls back to localStorage/Heap.
 
 * Every datastore instance will implement all the interface that the data-store exposes
 
-* Currently we have only indexedDB and heap impl. We can extend it websql or which ever local storage it can use / a completely service based impl.
+* Currently we have support for indexedDB/LocalSotrage/heap. We can extend it websql or which ever local storage it can use / a completely service based impl.
 
 * Promise based implementation. Every interface return a promise.
 
