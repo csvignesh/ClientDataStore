@@ -24,7 +24,7 @@ var jshintOptions = {
     newcap: true,
     immed: true,
     camelcase: true,
-    maxcomplexity: 9,
+    maxcomplexity: 10,
     maxlen: 120,
     nonbsp: true,
     freeze: true
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
                 captureTimeout: 120000,
                 hostname: 'localhost',
                 browsers: grunt.option('browsers') ? grunt.option('browsers').split(',') : [
-                    'PhantomJS'
+                    'Firefox', 'Chrome', 'Opera'
                 ],
                 frameworks: [
                     'lasso',

@@ -22,7 +22,8 @@ describe('data-store/indexed-db/insert', function() {
                     attr2: 'B'
                 }
             ]);
-        }).then(function() {
+        }).then(function(data) {
+            expect(data.length).to.eql(1);
             return datastore.select({
                 index: 'attr1',
                 name: 'table1'
