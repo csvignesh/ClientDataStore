@@ -1,6 +1,6 @@
 {
     "name": "clientdatastore",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Promise based client/server side storage. Uses IndexedDB/localStorage/heap based on availability",
     "main": "lib/index.js",
     "scripts": {
